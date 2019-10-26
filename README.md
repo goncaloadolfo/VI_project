@@ -1,9 +1,5 @@
-# VI_project
-2019 music trends dashboard
 
-# Information Visualization
-
-# CHECKPOINT I: Visualization Proposal
+# Visualization Proposal
 
 G52
 
@@ -15,10 +11,7 @@ The visualization to be developed is inserted in the music field and focuses on 
 
 The dataset used in this project was gathered by us, using the csv files available at [Spotify Charts](https://spotifycharts.com) and making requests to the [Spotify API](https://developer.spotify.com/documentation/web-api/reference/tracks/) to obtain more information about the tracks. To retrieve the information, we used a small _JavaScript_ program, written by us, that allows us to select the dates from which we want the charts. Our dataset is not available online.
 
-1.
-  1.
-    1.
-      1. **3. Example Questions**
+**3. Example Questions**
 
 - **--** How does the features (energy, loudness, tempo, etc) of the track affect its popularity?
 - **--** Are music trends affected by the song duration?
@@ -28,10 +21,7 @@ The dataset used in this project was gathered by us, using the csv files availab
 - **--** Which tracks lasted longer on the top? Why?
 - **--** Is there any correlation between the happiness / danceability of the most listened tracks with the time of year?
 
-1.
-  1.
-    1.
-      1. **4. Data Sample**
+**4. Data Sample**
 
 (from &quot;spotify-charts.json&quot;)
 
