@@ -2,14 +2,107 @@
 
   <head>
    <title>Spotify Trends</title>
-   <link rel="stylesheet" href="oscars.css">
+   <link rel="stylesheet" href="dashboard_menu_style.css">
    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
    <script src="spotify.js"></script>
    <meta charset="UTF-8">
   </head>
 
   <body>
-    <h1>Spotify Trends</h1>
+    <!-- Filters + Music track list -->
+    <section id="dashboard_menu">
+        <section id="filters">
+            <div>
+                <label for=from_date><b>From:</b></label> <input type="date" id="from_date" name="from_date" min="2019-01-01">
+            </div>
+            <div>
+                <label for="to_date"><b>To:</b></label> <input type="date" id="to_date" name="to_date" min="2019-01-01">
+            </div>
+            <input type="text" name="track_search" placeholder="search">
+        </section>
+
+        <section id="tracks_list">
+            <ul>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">1</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">2</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">3</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">4</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">5</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">6</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">7</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">8</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+                <li class="track_item"> <!-- estes items vao ser postos dinamicamente, e so para fazer os css -->
+                    <div class="track_rank">9</div>
+                    <div class="track_features">
+                        <div class="track_title">Dance Monkey</div>
+                        <div class="track_streams">5.5M</div>
+                        <div class="track_artist">Tones and I</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="explicit_info">
+            <b><span id="nr_etracks">135</span><span> E tracks in </span><span id="nr_tracks">200</span></b>
+        </section>
+    </section>
+
     <div id="the_chart"></div>
     <div id="second_chart"></div>
     <div id='line_chart'></div>

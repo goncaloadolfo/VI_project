@@ -1,0 +1,73 @@
+body{
+    background-color: black;
+}
+
+/* general style for menu */
+#dashboard_menu{
+    width: 15%;
+    border: white solid 2px;
+    position: relative;
+}
+
+/* filters style */
+#filters{
+    border: white solid 1px;
+    background-color: white;
+}
+
+#filters > div{
+    margin: 5%;
+}
+
+input[type="date"]{
+    width: 72%;
+    float: right;
+}
+
+input[type='text']{
+    margin: 2%;
+    width: 96%;
+}
+
+/* explicit tracks info style */
+#explicit_info{
+    width: 100%;
+    border-top: white solid 1px;
+    background-color: white;
+}
+
+#nr_etracks{
+    margin-left: 2%;
+}
+
+/* list style */
+#tracks_list > ul{
+    list-style: None;
+    padding: 0;
+    margin: 0;
+    height: 420px;
+    overflow-x: auto;
+}
+
+.track_item{
+    border-bottom: white solid 1px;
+}
+
+.track_rank{
+    float: left;
+    margin-left: 5%;
+    font-size: 1.7rem;
+    margin-top: 3%;
+    color: white;
+}
+
+.track_features{
+    margin-left: 25%;
+    margin-bottom: 3%;
+    margin-top: 2%;
+    color: #ff0000;
+}
+
+.track_artist{
+    color: #800000;
+}
