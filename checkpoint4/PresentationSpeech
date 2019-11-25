@@ -1,0 +1,27 @@
+Boa tarde a todos, apenas para relembrar o contexto da visualização.. o nosso projeto apresenta
+como foco facilitar a interpretação de tendências musicais do ano 2019. 
+
+Para tal, o dashboard é composto por uma zona que controla a listagem de músicas, nomeadamente através da mudança do intervalo
+de tempo a considerar e com filtros baseados nas características das músicas que ainda não foi
+implementado. 
+
+O conjunto de músicas a considerar para os idiomas são definidos por um dia ou intervalo 
+de tempo definido pelo utilizador ao carregar no botão change date. 
+
+A lista é atualizada e as faixas
+são ordenadas pelo número de streams acumulados ao longo do tempo e se contiverem a letra E quer 
+dizer que são explicit. O ratio de músicas explicit pode ser visualizado no final da lista. 
+
+Devido 
+ao número de faixas que a lista pode tomar, foi implementada uma search bar para facilitar a procura 
+ao utilizador podendo pesquisar por faixa ou artista. 
+
+Relativamente aos idiomas, o spider chart apresenta
+por omissão demonstrado a média das características musicais das músicas na lista. Serve como referência
+pois podem ser adicionadas faixas individualmente (até 3) sendo apresentadas com uma cor diferente.
+
+ 
+No scatter plot podemos ver a correlação entre os valores de streaming numbers e uma dada característica
+como a energia, instrumentalidade, entre outras.. Tal como se pode observar, as faixas selecionadas 
+ficam highlighted e passando o mouse em cima de um dado ponto é apresentada informação complementar. 
+Obrigado!  
