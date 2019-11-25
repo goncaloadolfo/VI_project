@@ -59,12 +59,12 @@ const ScatterPlot = function (parentSelector, data, options) {
         .append('div')
         .style('opacity', 0)
         .attr('class', 'tooltip')
-    .style('background-color', 'white')
-    .style('color', 'black')
-    .style('border', 'solid')
-    .style('border-width', '1px')
-    .style('border-radius', '5px')
-    .style('padding', '2px')
+        .style('background-color', 'white')
+        .style('color', 'black')
+        .style('border', 'solid')
+        .style('border-width', '1px')
+        .style('border-radius', '5px')
+        .style('padding', '2px')
 
     // Add dots
     svg.append('g')
@@ -87,6 +87,8 @@ const ScatterPlot = function (parentSelector, data, options) {
             // .transition()
             // .duration(200)
             .style('opacity', 0)
+            .style('left', '0px')
+            .style('top', '0px')
         )
 }
 
