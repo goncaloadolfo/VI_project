@@ -107,10 +107,6 @@ export default class Tracks extends Component {
         })
     }
 
-    handleOnTrackClick = (track) => {
-        console.log(track)
-    }
-
     render() {
         let jumbotronStyle = {
             marginBottom: 0,
