@@ -37,9 +37,14 @@ export default class Tracks extends Component {
         super(props)
 
         this.state = {
+            tableHeight: 0,
             showDateForm: false,
             search: ''
         }
+
+        this.changedDates = false
+        this.topJumbotronRef = React.createRef()
+        this.bottomJumbotronRef = React.createRef()
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -52,6 +57,33 @@ export default class Tracks extends Component {
             date: date.join(' - '),
             tracks: searchInTracks(props.tracks, state.search)
         }
+    }
+
+    componentDidMount() {
+        this.setState({ tableHeight: window.innerHeight - this.topJumbotronRef.current.clientHeight - this.bottomJumbotronRef.current.clientHeight })
+        window.addEventListener('resize', this.updateHeights)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateHeights)
+    }
+
+    shouldComponentUpdate(nextProps) {
+        this.changedDates = this.props.date.length !== nextProps.date.length
+        return true
+    }
+
+    componentDidUpdate() {
+        if (this.changedDates) {
+            this.updateHeights()
+            this.changedDates = false
+        }
+    }
+
+    updateHeights = () => {
+        this.setState({
+            tableHeight: window.innerHeight - this.topJumbotronRef.current.clientHeight - this.bottomJumbotronRef.current.clientHeight
+        })
     }
 
     handleChangeDateOnClick = () => {
@@ -80,9 +112,14 @@ export default class Tracks extends Component {
     }
 
     render() {
+        let jumbotronStyle = {
+            marginBottom: 0,
+            padding: '2rem 2rem'
+        }
+
         return (
             <>
-                <Jumbotron>
+                <Jumbotron ref={this.topJumbotronRef} style={jumbotronStyle}>
                     <h1>{this.state.date}</h1>
                     <p>
                         <Button variant="outline-light" onClick={this.handleChangeDateOnClick}>Change date(s)</Button>
@@ -91,23 +128,25 @@ export default class Tracks extends Component {
                     </p>
                     <Form.Control type="search" placeholder="Search..." value={this.state.search} onChange={this.handleOnSearchChange} />
                 </Jumbotron>
-                <Table responsive hover>
-                    <tbody>
-                        {this.state.tracks.map(t => {
-                            let style = { cursor: 'pointer' }
-                            if (this.props.selectedTracks[t.Id])
-                                style.backgroundColor = this.props.selectedTracks[t.Id].color
-                            return (
-                                <tr key={t.Position} onClick={() => this.props.onTrackClick(t)} style={style}>
-                                    <td><b>{t.Position}</b></td>
-                                    <td><b>{t['Track Name']}</b> {t.Explicit ? '\ud83c\udd74' : ''} <small>by {t.Artist}</small></td>
-                                    <td><b>{t.Streams}</b></td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </Table>
-                <Jumbotron>
+                <div style={{ overflow: 'auto', height: `${this.state.tableHeight}px` }}>
+                    <Table responsive hover>
+                        <tbody>
+                            {this.state.tracks.map(t => {
+                                let style = { cursor: 'pointer' }
+                                if (this.props.selectedTracks[t.Id])
+                                    style.backgroundColor = this.props.selectedTracks[t.Id].color
+                                return (
+                                    <tr key={t.Position} onClick={() => this.props.onTrackClick(t)} style={style}>
+                                        <td><b>{t.Position}</b></td>
+                                        <td><b>{t['Track Name']}</b> {t.Explicit ? '\ud83c\udd74' : ''} <small>by {t.Artist}</small></td>
+                                        <td><b>{t.Streams}</b></td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                </div>
+                <Jumbotron ref={this.bottomJumbotronRef} style={jumbotronStyle}>
                     <div className="lead">{this.props.numExplicit} &#x1f174; tracks in {this.props.tracks.length}</div>
                 </Jumbotron>
                 <DateForm maxDate={this.props.maxDate} show={this.state.showDateForm}
