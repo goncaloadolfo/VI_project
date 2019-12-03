@@ -37,7 +37,6 @@ export default class WordCloud extends Component {
             a.streams = fontSizeDiff * percentage + MIN_FONT_SIZE
             return a
         })
-        console.log(artistsStreams)
         return { artistsStreams: artistsStreams }
     }
 
