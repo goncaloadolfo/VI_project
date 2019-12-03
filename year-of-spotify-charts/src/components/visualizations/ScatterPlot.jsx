@@ -46,6 +46,11 @@ export default class ScatterPlot extends Component {
             xAttribute: this.state.feature,
             yDomain: [0, this.props.tracks[0].Streams],
             yAttribute: 'Streams',
+            dotRadius: track => {
+                if (this.props.selectedTracks[track.Id])
+                    return 3.0
+                return 1.5
+            },
             color: track => {
                 if (this.props.selectedTracks[track.Id])
                     return this.props.selectedTracks[track.Id].color

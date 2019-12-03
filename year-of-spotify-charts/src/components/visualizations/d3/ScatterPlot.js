@@ -9,7 +9,7 @@ const ScatterPlot = function (parentSelector, data, options) {
         xAttribute: '',
         yDomain: [0, 100],
         yAttribute: '',
-        dotRadius: 1.5,
+        dotRadius: d => 1.5,
         color: d3.scaleOrdinal().range(['white']),	          // Color function
         onDotClick: d => { },
         tooltipHtml: d => `${cfg.xAttribute}: ${d[cfg.xAttribute]}<br />${cfg.yAttribute}: ${d[cfg.yAttribute]}`
@@ -82,7 +82,7 @@ const ScatterPlot = function (parentSelector, data, options) {
         .append('circle')
         .attr('cx', d => x(d[cfg.xAttribute]))
         .attr('cy', d => y(d[cfg.yAttribute]))
-        .attr('r', cfg.dotRadius)
+        .attr('r', d => cfg.dotRadius(d))
         .style('fill', d => cfg.color(d))
         .on('mouseover', () => tooltip.style('opacity', 1))
         .on('mousemove', function (d) {
