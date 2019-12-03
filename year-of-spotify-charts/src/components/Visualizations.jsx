@@ -28,30 +28,33 @@ export default class Visualizations extends Component {
     }
 
     render() {
+        let style = {
+            width: '50%'
+        }
         return (
             <Container fluid={true}>
                 <Row style={{ height: this.state.rowHeight }}>
-                    <Col style={{ width: '50%' }}>
+                    <Col style={style}>
                         <SpiderChart tracks={this.props.tracks} selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
                     </Col>
-                    <Col style={{ width: '50%' }}>
+                    <Col style={style}>
                         <ScatterPlot tracks={this.props.tracks} selectedTracks={this.props.selectedTracks}
                             onTrackClick={this.props.onTrackClick} height={this.state.rowHeight} />
                     </Col>
                 </Row>
                 <Row style={{ height: this.state.rowHeight }}>
-                    <Col style={{ width: '50%' }}>
                         <AreaChart selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
+                    <Col style={style}>
                     </Col>
-                    <Col style={{ width: '50%' }}>
+                    <Col style={style}>
                         <ForceLayout tracks={this.props.tracks} selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
                     </Col>
                 </Row>
                 <Row style={{ height: this.state.rowHeight }}>
-                    <Col style={{ width: '50%' }}>
+                    <Col style={style}>
                         <WordCloud tracks={this.props.tracks} height={this.state.rowHeight} />
                     </Col>
-                    <Col style={{ width: '50%' }}>
+                    <Col style={style}>
                         <BarChart tracks={this.props.tracks} height={this.state.rowHeight} />
                     </Col>
                 </Row>
