@@ -46,12 +46,11 @@ export default class ScatterPlot extends Component {
             xAttribute: this.state.feature,
             yDomain: [0, this.props.tracks[0].Streams],
             yAttribute: 'Streams',
-            color: id => {
-                if (this.props.selectedTracks[id])
-                    return this.props.selectedTracks[id].color
+            color: track => {
+                if (this.props.selectedTracks[track.Id])
+                    return this.props.selectedTracks[track.Id].color
                 return 'white'
             },
-            colorAttribute: 'Id',
             onDotClick: this.props.onTrackClick,
             tooltipHtml: t => `Track Name: ${t['Track Name']}<br />${this.state.feature}: ${t[this.state.feature]}<br />Streams: ${t.Streams}`
         })

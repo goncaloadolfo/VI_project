@@ -11,7 +11,6 @@ const ScatterPlot = function (parentSelector, data, options) {
         yAttribute: '',
         dotRadius: 1.5,
         color: d3.scaleOrdinal().range(['white']),	          // Color function
-        colorAttribute: '',
         onDotClick: d => { },
         tooltipHtml: d => `${cfg.xAttribute}: ${d[cfg.xAttribute]}<br />${cfg.yAttribute}: ${d[cfg.yAttribute]}`
     }
@@ -76,7 +75,7 @@ const ScatterPlot = function (parentSelector, data, options) {
         .attr('cx', d => x(d[cfg.xAttribute]))
         .attr('cy', d => y(d[cfg.yAttribute]))
         .attr('r', cfg.dotRadius)
-        .style('fill', d => cfg.color(d[cfg.colorAttribute]))
+        .style('fill', d => cfg.color(d))
         .on('mouseover', () => tooltip.style('opacity', 1))
         .on('mousemove', function (d) {
             tooltip
