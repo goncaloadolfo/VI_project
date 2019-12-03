@@ -164,7 +164,8 @@ export default class App extends Component {
                         />
                     </Col>
                     <Col>
-                        <Visualizations tracks={this.state.tracks} selectedTracks={this.state.selectedTracks} />
+                        <Visualizations tracks={this.state.tracks} selectedTracks={this.state.selectedTracks}
+                            onTrackClick={this.handleOnTrackClick} />
                     </Col>
                 </Row>
             </Container>

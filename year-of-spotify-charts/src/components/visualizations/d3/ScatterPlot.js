@@ -12,6 +12,7 @@ const ScatterPlot = function (parentSelector, data, options) {
         dotRadius: 1.5,
         color: d3.scaleOrdinal().range(['white']),	          // Color function
         colorAttribute: '',
+        onDotClick: d => { },
         tooltipHtml: d => `${cfg.xAttribute}: ${d[cfg.xAttribute]}<br />${cfg.yAttribute}: ${d[cfg.yAttribute]}`
     }
 
@@ -90,6 +91,13 @@ const ScatterPlot = function (parentSelector, data, options) {
             .style('left', '0px')
             .style('top', '0px')
         )
+        .on('click', d => {
+            tooltip
+                .style('opacity', 0)
+                .style('left', '0px')
+                .style('top', '0px')
+            cfg.onDotClick(d)
+        })
 }
 
 module.exports = ScatterPlot

@@ -35,7 +35,8 @@ export default class Visualizations extends Component {
                         <SpiderChart tracks={this.props.tracks} selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
                     </Col>
                     <Col style={{ width: '50%' }}>
-                        <ScatterPlot tracks={this.props.tracks} selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
+                        <ScatterPlot tracks={this.props.tracks} selectedTracks={this.props.selectedTracks}
+                            onTrackClick={this.props.onTrackClick} height={this.state.rowHeight} />
                     </Col>
                 </Row>
                 <Row style={{ height: this.state.rowHeight }}>
