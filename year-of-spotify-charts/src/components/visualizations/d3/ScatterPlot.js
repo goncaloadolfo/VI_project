@@ -52,7 +52,15 @@ const ScatterPlot = function (parentSelector, data, options) {
         .range([height, 0])
 
     svg.append('g')
-        .call(d3.axisLeft(y))
+        .call(d3.axisLeft(y)
+            .tickFormat(d => {
+                if (d / 1000000 >= 1)
+                    return `${d / 1000000}M`
+                if (d / 1000 >= 1)
+                    return `${d / 1000}k`
+                return d
+            })
+        )
 
     // Add tooltip div
     let tooltip = d3.select(parentSelector)
