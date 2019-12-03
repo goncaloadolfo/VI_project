@@ -104,7 +104,7 @@ export default class SpiderChart extends Component {
             format: '.3f',
             unit: '',
             color: d3.scaleOrdinal().range(colors),
-            legend: { title: 'Tracks Features', translateX: -120, translateY: 40 },
+            legend: { title: 'Tracks:', translateX: -120, translateY: 40 },
             opacityArea: .05,
             opacityCircles: .05
         })
