@@ -61,7 +61,7 @@ export default class ScatterPlot extends Component {
             (acc, t) => t[this.state.feature] > acc ? t[this.state.feature] : acc,
             this.props.tracks[0][this.state.feature]
         )
-        return max
+        return (max < 1 && max > 0) ? 1 : max
     }
 
     getFeatureMin() {
@@ -69,7 +69,7 @@ export default class ScatterPlot extends Component {
             (acc, t) => t[this.state.feature] < acc ? t[this.state.feature] : acc,
             this.props.tracks[0][this.state.feature]
         )
-        return min < 0 ? min : 0
+        return (min < 0 || min >= 1) ? min : 0
     }
 
     handleOnFeatureChange = (ev) => {
