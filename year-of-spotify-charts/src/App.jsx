@@ -69,13 +69,15 @@ export default class App extends Component {
     }
 
     getTracksByDates(dates) {
+        let dataset = JSON.parse(JSON.stringify(originalDataset))
+
         if (dates.length === 1)
-            return originalDataset.filter(t => t.Date === dates[0])
+            return dataset.filter(t => t.Date === dates[0])
 
         if (dates.length === 2) {
             let fromDate = new Date(dates[0]).valueOf()
             let toDate = new Date(dates[1]).valueOf()
-            let tracks = originalDataset.filter(t => {
+            let tracks = dataset.filter(t => {
                 let date = new Date(t.Date)
                 return date >= fromDate && date <= toDate
             })
