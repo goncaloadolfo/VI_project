@@ -43,8 +43,8 @@ export default class Visualizations extends Component {
                     </Col>
                 </Row>
                 <Row style={{ height: this.state.rowHeight }}>
-                        <AreaChart selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
                     <Col style={style}>
+                        <AreaChart selectedTracks={this.props.selectedTracks} date={this.props.date} height={this.state.rowHeight} />
                     </Col>
                     <Col style={style}>
                         <ForceLayout tracks={this.props.tracks} selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
