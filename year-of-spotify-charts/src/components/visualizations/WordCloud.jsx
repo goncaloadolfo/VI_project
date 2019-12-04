@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 const d3WordCloud = require('./d3/WordCloud')
 
-const MAX_FONT_SIZE = 30
+const MAX_FONT_SIZE = 40
 const MIN_FONT_SIZE = 7
 
 export default class WordCloud extends Component {
