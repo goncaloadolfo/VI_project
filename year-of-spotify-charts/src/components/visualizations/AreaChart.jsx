@@ -10,6 +10,7 @@ export default class AreaChart extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            accumulated: false,
             nDays: 5,
             minDate: null,
             maxDate: null
@@ -78,6 +79,20 @@ export default class AreaChart extends Component {
             }
         }
 
+        if (this.state.accumulated) {
+            data = JSON.parse(JSON.stringify(data))
+            data = data.map(
+                e => e.reverse().map(
+                    (d, mapIdx) => {
+                        let dCopy = JSON.parse(JSON.stringify(d))
+                        for (let i = 0; i < mapIdx; i++)
+                            dCopy.Streams = `${+dCopy.Streams + +e[i].Streams}`
+                        return dCopy
+                    }
+                )
+            )
+        }
+
         d3AreaChart('#area-chart', data, {
             w: this.areaChartDivRef.current.offsetWidth,
             h: this.props.height - 60,
@@ -99,11 +114,17 @@ export default class AreaChart extends Component {
         this.setState({ nDays: ev.target.value })
     }
 
+    handleOnAccumulatedChange = (ev) => {
+        this.setState({ accumulated: ev.target.checked })
+    }
+
     render() {
         return (
             <>
                 <Form inline style={{ marginTop: 10, float: 'right' }}>
-                    {/* <Form.Label>Number of days: </Form.Label> */}
+                    <Form.Check type='switch' label='accumulated' id='accumulated'
+                        checked={this.state.accumulated} onChange={this.handleOnAccumulatedChange} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Form.Control type='number' min={2} max={MAX_N_DAYS}
                         value={this.state.nDays} onChange={this.handleOnNDaysChange} />
                 </Form>
