@@ -59,10 +59,16 @@ const AreaChart = function (parentSelector, data, options) {
         .domain([d3.min(data, entry => d3.min(entry.values, d => d.date)), d3.max(data, entry => d3.max(entry.values, d => d.date))])
         .range([0, width])
 
+    let numberOfValues = cfg.numberOfValues
+    if (numberOfValues > 75)
+        numberOfValues = ~~(numberOfValues / 30)
+    else if (numberOfValues > 14)
+        numberOfValues = ~~(numberOfValues / 7)
+
     svg.append('g')
         .attr('transform', `translate(0, ${height})`)
         .call(d3.axisBottom(x)
-            .ticks(cfg.numberOfValues)
+            .ticks(numberOfValues)
             .tickSizeOuter(0)
             .tickFormat(d3.timeFormat('%d %b'))
         )

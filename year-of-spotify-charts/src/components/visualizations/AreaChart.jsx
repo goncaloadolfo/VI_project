@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 const d3 = require('d3')
 const d3AreaChart = require('./d3/AreaChart')
 
-const MAX_N_DAYS = 14
+const MAX_N_DAYS = 365
 
 export default class AreaChart extends Component {
     constructor(props) {
@@ -103,7 +103,7 @@ export default class AreaChart extends Component {
             dotRadius: 3,
             lineWidth: 1.5,
             areaOpacity: .15,
-            numberOfValues: nDays,
+            numberOfValues: nDays + 1,
             color: d3.scaleOrdinal()
                 .domain(colorDomain)
                 .range(colorRange)
