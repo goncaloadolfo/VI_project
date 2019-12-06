@@ -9,9 +9,10 @@ const WordCloud = function (parentSelector, data, options) {
         wordsPadding: 5,
         color: d3.scaleOrdinal(d3.schemeSet2),                // Color function
         textAttribute: '',
-        onWordClick: d => { },
         // tooltipHtml: d => `${cfg.xAttribute}: ${d[cfg.xAttribute]}<br />${cfg.yAttribute}: ${d[cfg.yAttribute]}`
         valueAttribute: '',
+        sizeScale: d => 15,
+        onWordClick: d => { }
     }
 
     // Put all of the options into a variable called cfg
@@ -46,7 +47,7 @@ const WordCloud = function (parentSelector, data, options) {
         }))
         .padding(cfg.wordsPadding)
         .rotate(() => ~~(Math.random() * 2) * 90)
-        .fontSize(d => d.size)
+        .fontSize(d => cfg.sizeScale(d.value))
         .on('end', draw)
 
     layout.start()
@@ -57,7 +58,7 @@ const WordCloud = function (parentSelector, data, options) {
             .selectAll('text')
             .data(words).enter()
             .append('text')
-            .style('font-size', d => `${d.size}px`)
+            .style('font-size', d => `${cfg.sizeScale(d.value)}px`)
             .style('fill', (d, i) => cfg.color(i))
             .attr('text-anchor', 'middle')
             // .attr('font-family', 'Impact')
