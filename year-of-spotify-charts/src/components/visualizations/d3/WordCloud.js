@@ -9,7 +9,6 @@ const WordCloud = function (parentSelector, data, options) {
         wordsPadding: 5,
         color: d3.scaleOrdinal(d3.schemeSet2),                // Color function
         textAttribute: '',
-        // tooltipHtml: d => `${cfg.xAttribute}: ${d[cfg.xAttribute]}<br />${cfg.yAttribute}: ${d[cfg.yAttribute]}`
         valueAttribute: '',
         sizeScale: d => 15,
         onWordClick: d => { }
@@ -51,7 +50,7 @@ const WordCloud = function (parentSelector, data, options) {
         .on('end', draw)
 
     layout.start()
-    
+
     function draw(words) {
         svg.append('g')
             .attr('transform', `translate(${layout.size()[0] / 2}, ${layout.size()[1] / 2})`)
