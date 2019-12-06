@@ -55,7 +55,8 @@ export default class Visualizations extends Component {
                         <WordCloud tracks={this.props.tracks} height={this.state.rowHeight} />
                     </Col>
                     <Col style={style}>
-                        <BarChart tracks={this.props.tracks} height={this.state.rowHeight} />
+                        <BarChart tracks={this.props.tracks} selectedTracks={this.props.selectedTracks}
+                            allTracksMap={this.props.allTracksMap} date={this.props.date} height={this.state.rowHeight} />
                     </Col>
                 </Row>
             </Container>
