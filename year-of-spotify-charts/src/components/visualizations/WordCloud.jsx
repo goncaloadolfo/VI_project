@@ -61,7 +61,7 @@ export default class WordCloud extends Component {
             h: this.props.height - 15,
             margin: { top: 0, right: 0, bottom: 0, left: 0 },
             textAttribute: 'artist',
-            sizeAttribute: 'streams',
+            valueAttribute: 'streams',
             wordsPadding: 3
         })
     }
