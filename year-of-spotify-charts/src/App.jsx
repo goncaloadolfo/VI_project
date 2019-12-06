@@ -4,6 +4,18 @@ import Tracks from './components/Tracks'
 import Visualizations from './components/Visualizations'
 
 const originalDataset = require('./data/spotify-charts.json')
+const allTracksMap = originalDataset.reduce(
+    (acc, t) => {
+        if (!acc[t.Id]) {
+            acc[t.Id] = {
+                track: t,
+                allEntries: originalDataset.filter(e => e.Id === t.Id)
+            }
+        }
+        return acc
+    },
+    {}
+)
 const MAX_TRACKS_SELECTED = 3
 const colors = ['Magenta', 'OrangeRed', 'Chartreuse']
 
@@ -167,7 +179,8 @@ export default class App extends Component {
                     </Col>
                     <Col>
                         <Visualizations tracks={this.state.tracks} selectedTracks={this.state.selectedTracks}
-                            onTrackClick={this.handleOnTrackClick} date={this.state.date} />
+                            allTracksMap={allTracksMap} onTrackClick={this.handleOnTrackClick}
+                            date={this.state.date} />
                     </Col>
                 </Row>
             </Container>
