@@ -84,13 +84,6 @@ const BarChart = function (parentSelector, data, options) {
             .style('left', '-200px')
             .style('top', '-200px')
         )
-        .on('click', d => {
-            tooltip
-                .style('opacity', 0)
-                .style('left', '-200px')
-                .style('top', '-200px')
-            cfg.onBarClick(d)
-        })
 
     svg.append('g')
         .call(d3.axisLeft(y)
