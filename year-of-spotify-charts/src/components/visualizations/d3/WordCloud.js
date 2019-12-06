@@ -9,9 +9,9 @@ const WordCloud = function (parentSelector, data, options) {
         wordsPadding: 5,
         color: d3.scaleOrdinal(d3.schemeSet2),                // Color function
         textAttribute: '',
-        sizeAttribute: '',
         onWordClick: d => { },
         // tooltipHtml: d => `${cfg.xAttribute}: ${d[cfg.xAttribute]}<br />${cfg.yAttribute}: ${d[cfg.yAttribute]}`
+        valueAttribute: '',
     }
 
     // Put all of the options into a variable called cfg
@@ -41,7 +41,7 @@ const WordCloud = function (parentSelector, data, options) {
         .words(data.map(d => {
             return {
                 text: d[cfg.textAttribute],
-                size: d[cfg.sizeAttribute]
+                value: d[cfg.valueAttribute]
             }
         }))
         .padding(cfg.wordsPadding)
