@@ -8,7 +8,7 @@ const BarChart = function (parentSelector, data, options) {
         xAttribute: '',
         yAttribute: '',
         idAttribute: '',
-        color: d3.scaleOrdinal(d3.schemeSet2),	                          // Color function
+        color: d3.scaleOrdinal(d3.schemeSet2),	              // Color function
         tooltipHtml: d => `${cfg.yAttribute}: ${d[cfg.yAttribute]}<br />${cfg.xAttribute}: ${d[cfg.xAttribute]}`
     }
 
