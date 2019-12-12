@@ -4,6 +4,20 @@ import Tracks from './components/Tracks'
 import Visualizations from './components/Visualizations'
 
 const originalDataset = require('./data/spotify-charts.json')
+// Search for duplicated tracks with different ids
+for (let i = 0; i < originalDataset.length; i++) {
+    const t1 = originalDataset[i]
+    for (let j = i + 1; j < originalDataset.length; j++) {
+        const t2 = originalDataset[j]
+        if (
+            t1['Track Name'] === t2['Track Name'] &&
+            t1.Artist === t2.Artist &&
+            t1.Id !== t2.Id
+        )
+            originalDataset[j].Id = t1.Id
+    }
+}
+
 const allTracksMap = originalDataset.reduce(
     (acc, t) => {
         if (!acc[t.Id]) {
