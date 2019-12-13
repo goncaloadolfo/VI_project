@@ -148,25 +148,44 @@ export default class App extends Component {
         for (const selTrack in this.state.selectedTracks)
             if (this.state.selectedTracks.hasOwnProperty(selTrack) && this.state.selectedTracks[selTrack])
                 colors.push(this.state.selectedTracks[selTrack].color)
-        this.setState({
-            tracks: tracks,
-            numExplicit: numExplicit,
-            selectedTracks: {
+        let selTracks = tracks.length !== 0 ?
+            {
                 [tracks[0].Id]: {
                     color: colors.pop(),
                     track: tracks[0],
                     allEntries: allTracksMap[tracks[0].Id].allEntries
                 }
-            },
-            nSelectedTracks: 1,
+            } :
+            {}
+        this.setState({
+            tracks: tracks,
+            numExplicit: numExplicit,
+            selectedTracks: selTracks,
+            nSelectedTracks: tracks.length !== 0 ? 1 : 0,
             date: days
         })
     }
 
     handleOnFiltersChange = (filters) => {
         let tracks = this.filterTracks(this.getTracksByDates(this.state.date), filters)
+        let numExplicit = this.countExplicitTracks(tracks)
+        for (const selTrack in this.state.selectedTracks)
+            if (this.state.selectedTracks.hasOwnProperty(selTrack) && this.state.selectedTracks[selTrack])
+                colors.push(this.state.selectedTracks[selTrack].color)
+        let selTracks = tracks.length !== 0 ?
+            {
+                [tracks[0].Id]: {
+                    color: colors.pop(),
+                    track: tracks[0],
+                    allEntries: allTracksMap[tracks[0].Id].allEntries
+                }
+            } :
+            {}
         this.setState({
             tracks: tracks,
+            numExplicit: numExplicit,
+            selectedTracks: selTracks,
+            nSelectedTracks: tracks.length !== 0 ? 1 : 0,
             filters: filters
         })
     }
