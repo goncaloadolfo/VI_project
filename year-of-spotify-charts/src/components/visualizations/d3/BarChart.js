@@ -89,6 +89,9 @@ const BarChart = function (parentSelector, data, options) {
         .call(d3.axisLeft(y)
             .tickFormat(id => data.filter(e => e[cfg.idAttribute] === id)[0][cfg.yAttribute])
         )
+        .selectAll('text')
+        .attr('x', 6)
+        .style('text-anchor', 'start')
 }
 
 module.exports = BarChart
