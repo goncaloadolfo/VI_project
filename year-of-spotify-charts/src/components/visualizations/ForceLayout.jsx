@@ -24,7 +24,7 @@ export default class ForceLayout extends Component {
         super(props)
         this.state = {
             showForm: false,
-            features: ['Energy']
+            features: ['Energy', 'Valence', 'Danceability']
         }
         this.forceLayoutDivRef = React.createRef()
     }
