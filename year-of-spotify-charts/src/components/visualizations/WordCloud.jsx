@@ -71,6 +71,7 @@ export default class WordCloud extends Component {
                 v = fontSizeDiff * percentage + MIN_FONT_SIZE
                 return v
             },
+            maxSize: MAX_FONT_SIZE,
             wordsPadding: 3
         })
     }

@@ -10,6 +10,7 @@ const WordCloud = function (parentSelector, data, options) {
         color: d3.scaleOrdinal(d3.schemeSet2),                // Color function
         textAttribute: '',
         valueAttribute: '',
+        maxSize: 15,
         sizeScale: d => 15,
         onWordClick: d => { }
     }
@@ -45,7 +46,7 @@ const WordCloud = function (parentSelector, data, options) {
             }
         }))
         .padding(cfg.wordsPadding)
-        .rotate(() => ~~(Math.random() * 2) * 90)
+        .rotate(d => cfg.sizeScale(d.value) === cfg.maxSize ? 0 : ~~(Math.random() * 2) * 90)
         .fontSize(d => cfg.sizeScale(d.value))
         .on('end', draw)
 
