@@ -125,14 +125,17 @@ export default class App extends Component {
                 t.Position = `${idx + 1}`
                 return t
             })
-            tracks.filter(t => this.state.filters.reduce(
-                (acc, curr) => acc && curr(t),
-                true
-            ))
             return tracks
         }
 
         return null
+    }
+
+    filterTracks(tracks, filters) {
+        return tracks.filter(t => filters.reduce(
+            (acc, curr) => acc && curr(t),
+            true
+        ))
     }
 
     countExplicitTracks(tracks) {
@@ -140,7 +143,7 @@ export default class App extends Component {
     }
 
     handleOnDateChange = (days) => {
-        let tracks = this.getTracksByDates(days)
+        let tracks = this.filterTracks(this.getTracksByDates(days), this.state.filters)
         let numExplicit = this.countExplicitTracks(tracks)
         for (const selTrack in this.state.selectedTracks)
             if (this.state.selectedTracks.hasOwnProperty(selTrack) && this.state.selectedTracks[selTrack])
@@ -161,11 +164,7 @@ export default class App extends Component {
     }
 
     handleOnFiltersChange = (filters) => {
-        let tracks = this.state.tracks.filter(t => filters.reduce(
-            (acc, curr) => acc && curr(t),
-            true
-        ))
-        console.log(tracks)
+        let tracks = this.filterTracks(this.getTracksByDates(this.state.date), filters)
         this.setState({
             tracks: tracks,
             filters: filters
