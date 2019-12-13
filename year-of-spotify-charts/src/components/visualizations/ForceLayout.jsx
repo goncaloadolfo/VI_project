@@ -63,6 +63,7 @@ export default class ForceLayout extends Component {
     }
 
     getFeatureMax(feature) {
+        if (this.props.tracks.length === 0) return 0
         let max = this.props.tracks.reduce(
             (acc, t) => t[feature] > acc ? t[feature] : acc,
             this.props.tracks[0][feature]
@@ -73,6 +74,7 @@ export default class ForceLayout extends Component {
     }
 
     getFeatureMin(feature) {
+        if (this.props.tracks.length === 0) return 0
         let min = this.props.tracks.reduce(
             (acc, t) => t[feature] < acc ? t[feature] : acc,
             this.props.tracks[0][feature]

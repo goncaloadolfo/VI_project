@@ -47,8 +47,15 @@ export default class WordCloud extends Component {
 
     addD3() {
         let artistsStreams = this.state.artistsStreams
-        let max = artistsStreams[0].streams
-        let min = artistsStreams[artistsStreams.length - 1].streams
+        let max
+        let min
+        if (artistsStreams.length === 0) {
+            max = 0
+            min = 0
+        } else {
+            max = artistsStreams[0].streams
+            min = artistsStreams[artistsStreams.length - 1].streams
+        }
         let streamsDiff = max - min
         let fontSizeDiff = MAX_FONT_SIZE - MIN_FONT_SIZE
 

@@ -44,7 +44,7 @@ export default class ScatterPlot extends Component {
             margin: { top: 20, right: 30, bottom: 20, left: 65 },
             xDomain: [this.getFeatureMin(), this.getFeatureMax()],
             xAttribute: this.state.feature,
-            yDomain: [0, this.props.tracks[0].Streams],
+            yDomain: [0, this.props.tracks.length !== 0 ? this.props.tracks[0].Streams : 0],
             yAttribute: 'Streams',
             dotRadius: track => {
                 if (this.props.selectedTracks[track.Id])
@@ -62,6 +62,7 @@ export default class ScatterPlot extends Component {
     }
 
     getFeatureMax() {
+        if (this.props.tracks.length === 0) return 0
         let max = this.props.tracks.reduce(
             (acc, t) => t[this.state.feature] > acc ? t[this.state.feature] : acc,
             this.props.tracks[0][this.state.feature]
@@ -72,6 +73,7 @@ export default class ScatterPlot extends Component {
     }
 
     getFeatureMin() {
+        if (this.props.tracks.length === 0) return 0
         let min = this.props.tracks.reduce(
             (acc, t) => t[this.state.feature] < acc ? t[this.state.feature] : acc,
             this.props.tracks[0][this.state.feature]
