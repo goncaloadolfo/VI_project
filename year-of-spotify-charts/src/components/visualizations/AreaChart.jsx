@@ -11,7 +11,7 @@ export default class AreaChart extends Component {
         super(props)
         this.state = {
             accumulated: false,
-            nDays: 5,
+            nDays: 30,
             minDate: null,
             maxDate: null
         }
