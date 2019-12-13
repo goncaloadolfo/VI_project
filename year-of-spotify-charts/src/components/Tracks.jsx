@@ -351,7 +351,7 @@ class FiltersForm extends Component {
                 const element = this.state[key]
                 if (!element.checked) continue
                 if (element.values.length === 2)
-                    filters.push(t => t[key] >= element.values[0] && t[key] <= element.values[1])
+                    filters.push(t => +t[key] >= element.values[0] && +t[key] <= element.values[1])
                 else {
                     let value = element.values[0] === 'true'
                     filters.push(t => t[key] === value)
