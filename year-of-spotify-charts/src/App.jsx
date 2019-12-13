@@ -3,6 +3,8 @@ import { Row, Col, Container } from 'react-bootstrap'
 import Tracks from './components/Tracks'
 import Visualizations from './components/Visualizations'
 
+const d3 = require('d3')
+
 const originalDataset = require('./data/spotify-charts.json')
 // Search for duplicated tracks with different ids
 for (let i = 0; i < originalDataset.length; i++) {
@@ -32,6 +34,7 @@ const allTracksMap = originalDataset.reduce(
 )
 const MAX_TRACKS_SELECTED = 3
 const colors = ['Magenta', 'OrangeRed', 'Chartreuse']
+const defaultColors = d3.scaleOrdinal(d3.schemeDark2)
 
 console.log(originalDataset[0])
 /*
@@ -81,15 +84,26 @@ export default class App extends Component {
         this.state = {
             maxDate: originalDataset[0].Date,
             tracks: tracks,
-            selectedTracks: {
+            selectedTracks: {},
+            nSelectedTracks: 0,
+            defaultTracks: {
                 [tracks[0].Id]: {
-                    color: colors.pop(),
+                    color: defaultColors(0),
                     track: tracks[0],
                     allEntries: allTracksMap[tracks[0].Id].allEntries
-                }
+                },
+                [tracks[1].Id]: {
+                    color: defaultColors(1),
+                    track: tracks[1],
+                    allEntries: allTracksMap[tracks[1].Id].allEntries
+                },
+                [tracks[2].Id]: {
+                    color: defaultColors(2),
+                    track: tracks[2],
+                    allEntries: allTracksMap[tracks[2].Id].allEntries
+                },
             },
             filters: [],
-            nSelectedTracks: 1,
             numExplicit: this.countExplicitTracks(tracks),
             date: date
         }
@@ -142,26 +156,65 @@ export default class App extends Component {
         return tracks.reduce((acc, t) => t.Explicit ? acc + 1 : acc, 0)
     }
 
+    getDefaultTracks(tracks) {
+        switch (tracks.length) {
+            case 0:
+                return {}
+            case 1:
+                return {
+                    [tracks[0].Id]: {
+                        color: defaultColors(0),
+                        track: tracks[0],
+                        allEntries: allTracksMap[tracks[0].Id].allEntries
+                    }
+                }
+            case 2:
+                return {
+                    [tracks[0].Id]: {
+                        color: defaultColors(0),
+                        track: tracks[0],
+                        allEntries: allTracksMap[tracks[0].Id].allEntries
+                    },
+                    [tracks[1].Id]: {
+                        color: defaultColors(1),
+                        track: tracks[1],
+                        allEntries: allTracksMap[tracks[1].Id].allEntries
+                    }
+                }
+            default:
+                return {
+                    [tracks[0].Id]: {
+                        color: defaultColors(0),
+                        track: tracks[0],
+                        allEntries: allTracksMap[tracks[0].Id].allEntries
+                    },
+                    [tracks[1].Id]: {
+                        color: defaultColors(1),
+                        track: tracks[1],
+                        allEntries: allTracksMap[tracks[1].Id].allEntries
+                    },
+                    [tracks[2].Id]: {
+                        color: defaultColors(2),
+                        track: tracks[2],
+                        allEntries: allTracksMap[tracks[2].Id].allEntries
+                    },
+                }
+        }
+    }
+
     handleOnDateChange = (days) => {
         let tracks = this.filterTracks(this.getTracksByDates(days), this.state.filters)
         let numExplicit = this.countExplicitTracks(tracks)
         for (const selTrack in this.state.selectedTracks)
             if (this.state.selectedTracks.hasOwnProperty(selTrack) && this.state.selectedTracks[selTrack])
                 colors.push(this.state.selectedTracks[selTrack].color)
-        let selTracks = tracks.length !== 0 ?
-            {
-                [tracks[0].Id]: {
-                    color: colors.pop(),
-                    track: tracks[0],
-                    allEntries: allTracksMap[tracks[0].Id].allEntries
-                }
-            } :
-            {}
+        let defaultTracks = this.getDefaultTracks(tracks)
         this.setState({
             tracks: tracks,
             numExplicit: numExplicit,
-            selectedTracks: selTracks,
-            nSelectedTracks: tracks.length !== 0 ? 1 : 0,
+            selectedTracks: {},
+            nSelectedTracks: 0,
+            defaultTracks: defaultTracks,
             date: days
         })
     }
@@ -172,20 +225,13 @@ export default class App extends Component {
         for (const selTrack in this.state.selectedTracks)
             if (this.state.selectedTracks.hasOwnProperty(selTrack) && this.state.selectedTracks[selTrack])
                 colors.push(this.state.selectedTracks[selTrack].color)
-        let selTracks = tracks.length !== 0 ?
-            {
-                [tracks[0].Id]: {
-                    color: colors.pop(),
-                    track: tracks[0],
-                    allEntries: allTracksMap[tracks[0].Id].allEntries
-                }
-            } :
-            {}
+        let defaultTracks = this.getDefaultTracks(tracks)
         this.setState({
             tracks: tracks,
             numExplicit: numExplicit,
-            selectedTracks: selTracks,
-            nSelectedTracks: tracks.length !== 0 ? 1 : 0,
+            selectedTracks: {},
+            nSelectedTracks: 0,
+            defaultTracks: defaultTracks,
             filters: filters
         })
     }
@@ -223,12 +269,14 @@ export default class App extends Component {
                     <Col xs md lg="3">
                         <Tracks tracks={this.state.tracks} date={this.state.date} maxDate={this.state.maxDate}
                             numExplicit={this.state.numExplicit} onDateChange={this.handleOnDateChange}
-                            onTrackClick={this.handleOnTrackClick} selectedTracks={this.state.selectedTracks}
+                            onTrackClick={this.handleOnTrackClick}
+                            selectedTracks={this.state.nSelectedTracks === 0 ? this.state.defaultTracks : this.state.selectedTracks}
                             onFiltersChange={this.handleOnFiltersChange}
                         />
                     </Col>
                     <Col>
-                        <Visualizations tracks={this.state.tracks} selectedTracks={this.state.selectedTracks}
+                        <Visualizations tracks={this.state.tracks}
+                            selectedTracks={this.state.nSelectedTracks === 0 ? this.state.defaultTracks : this.state.selectedTracks}
                             allTracksMap={allTracksMap} onTrackClick={this.handleOnTrackClick}
                             date={this.state.date}
                         />
