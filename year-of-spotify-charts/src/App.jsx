@@ -85,7 +85,7 @@ export default class App extends Component {
                 [tracks[0].Id]: {
                     color: colors.pop(),
                     track: tracks[0],
-                    allEntries: originalDataset.filter(t => t.Id === tracks[0].Id)
+                    allEntries: allTracksMap[tracks[0].Id].allEntries
                 }
             },
             filters: [],
@@ -152,7 +152,7 @@ export default class App extends Component {
                 [tracks[0].Id]: {
                     color: colors.pop(),
                     track: tracks[0],
-                    allEntries: originalDataset.filter(t => t.Id === tracks[0].Id)
+                    allEntries: allTracksMap[tracks[0].Id].allEntries
                 }
             },
             nSelectedTracks: 1,
@@ -190,7 +190,7 @@ export default class App extends Component {
         selectedTracks[track.Id] = {
             color: colors.pop(),
             track: track,
-            allEntries: originalDataset.filter(t => t.Id === track.Id)
+            allEntries: allTracksMap[track.Id].allEntries
         }
         this.setState({
             selectedTracks: selectedTracks,
