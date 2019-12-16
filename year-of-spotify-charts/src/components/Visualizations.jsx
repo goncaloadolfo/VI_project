@@ -48,7 +48,9 @@ export default class Visualizations extends Component {
                         <AreaChart selectedTracks={this.props.selectedTracks} date={this.props.date} height={this.state.rowHeight} />
                     </Col>
                     <Col style={style}>
-                        <ForceLayout tracks={this.props.tracks} selectedTracks={this.props.selectedTracks} height={this.state.rowHeight} />
+                        <ForceLayout tracks={this.props.tracks} selectedTracks={this.props.selectedTracks}
+                            height={this.state.rowHeight} onTrackClick={this.props.onTrackClick}
+                        />
                     </Col>
                 </Row>
                 <Row style={{ height: this.state.rowHeight }}>
@@ -57,7 +59,9 @@ export default class Visualizations extends Component {
                     </Col>
                     <Col style={style}>
                         <BarChart tracks={this.props.tracks} selectedTracks={this.props.selectedTracks}
-                            allTracksMap={this.props.allTracksMap} date={this.props.date} height={this.state.rowHeight} />
+                            allTracksMap={this.props.allTracksMap} date={this.props.date} height={this.state.rowHeight}
+                            onTrackClick={this.props.onTrackClick}
+                        />
                     </Col>
                 </Row>
             </Container>
