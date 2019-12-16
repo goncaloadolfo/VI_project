@@ -37,6 +37,14 @@ const ScatterPlot = function (parentSelector, data, options) {
     let height = cfg.h - cfg.margin.top - cfg.margin.bottom
     let width = cfg.w - cfg.margin.left - cfg.margin.right
 
+    let formatter = d => {
+        if (d / 1000000 >= 1)
+            return `${d / 1000000}M`
+        if (d / 1000 >= 1)
+            return `${d / 1000}k`
+        return d
+    }
+
     // Add X axis
     let x = d3.scaleLinear()
         .domain(cfg.xDomain)
@@ -44,7 +52,10 @@ const ScatterPlot = function (parentSelector, data, options) {
 
     svg.append('g')
         .attr('transform', `translate(0, ${height})`)
-        .call(d3.axisBottom(x))
+        .call(
+            d3.axisBottom(x)
+                .tickFormat(formatter)
+        )
 
     // Add Y axis
     let y = d3.scaleLinear()
@@ -52,14 +63,9 @@ const ScatterPlot = function (parentSelector, data, options) {
         .range([height, 0])
 
     svg.append('g')
-        .call(d3.axisLeft(y)
-            .tickFormat(d => {
-                if (d / 1000000 >= 1)
-                    return `${d / 1000000}M`
-                if (d / 1000 >= 1)
-                    return `${d / 1000}k`
-                return d
-            })
+        .call(
+            d3.axisLeft(y)
+                .tickFormat(formatter)
         )
         .append('text')
         .attr('transform', 'rotate(-90)')
