@@ -172,7 +172,7 @@ const RadarChart = function (parentSelector, data, options) {
         .attr('x', (d, i) => rScale(maxValue * cfg.labelFactor) * cos(angleSlice * i - HALF_PI))
         .attr('y', (d, i) => rScale(maxValue * cfg.labelFactor) * sin(angleSlice * i - HALF_PI))
         .text(d => d)
-        .call(wrap, cfg.wrapWidth)
+        // .call(wrap, cfg.wrapWidth)
 
     /////////////////////////////////////////////////////////
     ///////////// Draw the radar chart blobs ////////////////
