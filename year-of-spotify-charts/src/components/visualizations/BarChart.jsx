@@ -46,7 +46,7 @@ export default class BarChart extends Component {
                 return 'SlateGrey'
             },
             tooltipHtml: d => {
-                let text = `Track: ${d.track}<br />`
+                let text = `Track: ${d.track}<br />Artist: ${d.artist}<br />`
                 text += this.props.date.length === 2 ? 'Max number' : 'Number'
                 text += ` of consecutive days on the charts: ${d.nDays}`
                 return text
@@ -61,6 +61,7 @@ export default class BarChart extends Component {
 
         let res = {
             track: element.track['Track Name'],
+            artist: element.track.Artist,
             id: element.track.Id,
             nDays: 0
         }
