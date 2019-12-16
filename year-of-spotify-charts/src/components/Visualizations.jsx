@@ -39,7 +39,8 @@ export default class Visualizations extends Component {
                     </Col>
                     <Col style={style}>
                         <ScatterPlot tracks={this.props.tracks} selectedTracks={this.props.selectedTracks}
-                            onTrackClick={this.props.onTrackClick} height={this.state.rowHeight} />
+                            onTrackClick={this.props.onTrackClick} height={this.state.rowHeight}
+                        />
                     </Col>
                 </Row>
                 <Row style={{ height: this.state.rowHeight }}>
