@@ -50,7 +50,8 @@ export default class BarChart extends Component {
                 text += this.props.date.length === 2 ? 'Max number' : 'Number'
                 text += ` of consecutive days on the charts: ${d.nDays}`
                 return text
-            }
+            },
+            onBarClick: d => this.props.onTrackClick(d.id)
         })
     }
 

@@ -9,6 +9,7 @@ const BarChart = function (parentSelector, data, options) {
         yAttribute: '',
         idAttribute: '',
         color: d3.scaleOrdinal(d3.schemeSet2),	              // Color function
+        onBarClick: d => { },
         tooltipHtml: d => `${cfg.yAttribute}: ${d[cfg.yAttribute]}<br />${cfg.xAttribute}: ${d[cfg.xAttribute]}`
     }
 
@@ -90,6 +91,13 @@ const BarChart = function (parentSelector, data, options) {
             .style('left', '-200px')
             .style('top', '-200px')
         )
+        .on('click', d => {
+            tooltip
+                .style('opacity', 0)
+                .style('left', '-200px')
+                .style('top', '-200px')
+            cfg.onBarClick(d)
+        })
 
     svg.append('g')
         .call(d3.axisLeft(y)
