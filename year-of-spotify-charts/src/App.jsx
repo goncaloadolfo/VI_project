@@ -105,7 +105,8 @@ export default class App extends Component {
             },
             filters: [],
             numExplicit: this.countExplicitTracks(tracks),
-            date: date
+            date: date,
+            search: ''
         }
     }
 
@@ -269,6 +270,12 @@ export default class App extends Component {
         })
     }
 
+    handleOnSearchChange = (search) => {
+        this.setState({
+            search: search
+        })
+    }
+
     render() {
         return (
             <Container fluid={true}>
@@ -276,15 +283,15 @@ export default class App extends Component {
                     <Col xs md lg="3">
                         <Tracks tracks={this.state.tracks} date={this.state.date} maxDate={this.state.maxDate}
                             numExplicit={this.state.numExplicit} onDateChange={this.handleOnDateChange}
-                            onTrackClick={this.handleOnTrackClick}
+                            onTrackClick={this.handleOnTrackClick} onFiltersChange={this.handleOnFiltersChange}
                             selectedTracks={this.state.nSelectedTracks === 0 ? this.state.defaultTracks : this.state.selectedTracks}
-                            onFiltersChange={this.handleOnFiltersChange}
+                            search={this.state.search} onSearchChange={this.handleOnSearchChange}
                         />
                     </Col>
                     <Col>
                         <Visualizations tracks={this.state.tracks}
                             selectedTracks={this.state.nSelectedTracks === 0 ? this.state.defaultTracks : this.state.selectedTracks}
-                            allTracksMap={allTracksMap} onTrackClick={this.handleOnTrackClick}
+                            allTracksMap={allTracksMap} onTrackClick={this.handleOnTrackClick} onSearchChange={this.handleOnSearchChange}
                             date={this.state.date}
                         />
                     </Col>

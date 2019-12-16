@@ -55,7 +55,7 @@ export default class Visualizations extends Component {
                 </Row>
                 <Row style={{ height: this.state.rowHeight }}>
                     <Col style={style}>
-                        <WordCloud tracks={this.props.tracks} height={this.state.rowHeight} />
+                        <WordCloud tracks={this.props.tracks} height={this.state.rowHeight} onWordClick={this.props.onSearchChange} />
                     </Col>
                     <Col style={style}>
                         <BarChart tracks={this.props.tracks} selectedTracks={this.props.selectedTracks}

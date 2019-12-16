@@ -72,7 +72,8 @@ export default class WordCloud extends Component {
                 return v
             },
             maxSize: MAX_FONT_SIZE,
-            wordsPadding: 3
+            wordsPadding: 3,
+            onWordClick: this.props.onWordClick
         })
     }
 

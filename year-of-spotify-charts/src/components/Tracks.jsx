@@ -39,8 +39,7 @@ export default class Tracks extends Component {
         this.state = {
             tableHeight: 0,
             showDateForm: false,
-            showFiltersForm: false,
-            search: ''
+            showFiltersForm: false
         }
 
         this.changedDates = false
@@ -56,7 +55,8 @@ export default class Tracks extends Component {
 
         return {
             date: date.join(' - '),
-            tracks: searchInTracks(props.tracks, state.search)
+            tracks: searchInTracks(props.tracks, props.search),
+            search: props.search
         }
     }
 
@@ -114,11 +114,7 @@ export default class Tracks extends Component {
     }
 
     handleOnSearchChange = (ev) => {
-        let search = ev.target.value
-        this.setState({
-            search: search,
-            tracks: searchInTracks(this.props.tracks, search)
-        })
+        this.props.onSearchChange(ev.target.value)
     }
 
     render() {
@@ -136,7 +132,7 @@ export default class Tracks extends Component {
                         &nbsp;
                         <Button variant="outline-light" onClick={this.handleFiltersOnClick}>Filter</Button>
                     </p>
-                    <Form.Control type="search" placeholder="Search..." value={this.state.search} onChange={this.handleOnSearchChange} />
+                    <Form.Control type="search" placeholder="Search..." value={this.props.search} onChange={this.handleOnSearchChange} />
                 </Jumbotron>
                 <div style={{ overflow: 'auto', height: `${this.state.tableHeight}px` }}>
                     <Table responsive hover>

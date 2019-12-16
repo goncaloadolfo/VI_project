@@ -64,6 +64,7 @@ const WordCloud = function (parentSelector, data, options) {
             // .attr('font-family', 'Impact')
             .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
             .text(d => d.text)
+            .on('click', d => cfg.onWordClick(d.text))
     }
 }
 
