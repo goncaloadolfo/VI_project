@@ -72,6 +72,12 @@ const AreaChart = function (parentSelector, data, options) {
             .tickSizeOuter(0)
             .tickFormat(d3.timeFormat('%d %b'))
         )
+        .append('text')
+        .attr('x', 440)
+        .attr('y', 9)
+        .attr('dy', '.71em')
+        .attr('fill', 'white')
+        .text(cfg.xAttribute)
 
     // Add Y axis
     let y = d3.scaleLinear()
@@ -89,12 +95,12 @@ const AreaChart = function (parentSelector, data, options) {
                 return d
             })
         )
-    // .append('text')
-    // .attr('transform', 'rotate(-90)')
-    // .attr('y', 6)
-    // .attr('dy', '.71em')
-    // .attr('fill', 'white')
-    // .text(cfg.yAttribute)
+        .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', -45)
+        .attr('dy', '.71em')
+        .attr('fill', 'white')
+        .text(cfg.yAttribute)
 
     // Add the areas
     let area = d3.area()

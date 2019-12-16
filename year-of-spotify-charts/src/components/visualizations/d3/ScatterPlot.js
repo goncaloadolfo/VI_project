@@ -61,6 +61,12 @@ const ScatterPlot = function (parentSelector, data, options) {
                 return d
             })
         )
+        .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', -45)
+        .attr('dy', '.71em')
+        .attr('fill', 'white')
+        .text(cfg.yAttribute)
 
     // Add tooltip div
     let tooltip = d3.select(parentSelector)
