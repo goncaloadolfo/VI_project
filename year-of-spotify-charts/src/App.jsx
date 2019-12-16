@@ -238,9 +238,16 @@ export default class App extends Component {
 
     handleOnTrackClick = (track) => {
         let selectedTracks = this.state.selectedTracks
-        if (selectedTracks[track.Id]) {
-            colors.push(selectedTracks[track.Id].color)
-            selectedTracks[track.Id] = undefined
+        let id
+        if ('string' === typeof track) {
+            id = track
+            track = allTracksMap[id].track
+        }
+        else
+            id = track.Id
+        if (selectedTracks[id]) {
+            colors.push(selectedTracks[id].color)
+            selectedTracks[id] = undefined
             this.setState({
                 selectedTracks: selectedTracks,
                 nSelectedTracks: this.state.nSelectedTracks - 1
@@ -251,10 +258,10 @@ export default class App extends Component {
             alert(`You have already reached the maximum number of tracks selected, ${MAX_TRACKS_SELECTED}, deselect one`)
             return
         }
-        selectedTracks[track.Id] = {
+        selectedTracks[id] = {
             color: colors.pop(),
             track: track,
-            allEntries: allTracksMap[track.Id].allEntries
+            allEntries: allTracksMap[id].allEntries
         }
         this.setState({
             selectedTracks: selectedTracks,
