@@ -49,6 +49,7 @@ export default class ForceLayout extends Component {
                     return 3.0
                 return 1.5
             },
+            onDotClick: this.props.onTrackClick,
             collideForceStrength: track => {
                 if (this.props.selectedTracks[track.Id])
                     return 3.0
@@ -58,7 +59,12 @@ export default class ForceLayout extends Component {
                 if (this.props.selectedTracks[track.Id])
                     return this.props.selectedTracks[track.Id].color
                 return 'white'
-            }
+            },
+            tooltipHtml: d => `Track: ${d['Track Name']}<br />Artist: ${d.Artist}<br />` +
+                this.state.features.reduce((acc, curr) => {
+                    if (acc.length !== 0) acc += '<br />'
+                    return acc + `${curr}: ${d[curr]}`
+                }, '')
         })
     }
 

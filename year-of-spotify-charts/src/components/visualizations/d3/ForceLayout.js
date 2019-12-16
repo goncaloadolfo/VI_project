@@ -8,6 +8,7 @@ const ForceLayout = function (parentSelector, data, options) {
         fociAttributes: [],
         fociDomains: [[]],
         dotRadius: d => 1.5,
+        onDotClick: d => { },
         collideForceStrength: 1.5,
         color: d => 'white',                	              // Color function
         tooltipHtml: d => cfg.fociAttributes.reduce((acc, curr) => {
@@ -123,6 +124,13 @@ const ForceLayout = function (parentSelector, data, options) {
                     .style('left', '-200px')
                     .style('top', '-200px')
                 )
+                .on('click', d => {
+                    tooltip
+                        .style('opacity', 0)
+                        .style('left', '-200px')
+                        .style('top', '-200px')
+                    cfg.onDotClick(d)
+                })
         })
 }
 
