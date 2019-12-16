@@ -45,7 +45,7 @@ const BarChart = function (parentSelector, data, options) {
         .call(d3.axisBottom(x))
         .append('text')
         .attr('x', 440)
-        .attr('y', 9)
+        .attr('y', 18)
         .attr('dy', '.71em')
         .attr('fill', 'white')
         .text(cfg.xAttribute)

@@ -74,7 +74,7 @@ const AreaChart = function (parentSelector, data, options) {
         )
         .append('text')
         .attr('x', 440)
-        .attr('y', 9)
+        .attr('y', 18)
         .attr('dy', '.71em')
         .attr('fill', 'white')
         .text(cfg.xAttribute)
