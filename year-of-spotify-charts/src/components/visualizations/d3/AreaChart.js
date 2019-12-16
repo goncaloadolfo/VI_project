@@ -166,8 +166,8 @@ const AreaChart = function (parentSelector, data, options) {
                 // .transition()
                 // .duration(200)
                 .style('opacity', 0)
-                .style('left', '0px')
-                .style('top', '0px')
+                .style('left', '-200px')
+                .style('top', '-200px')
             )
     })
 }
