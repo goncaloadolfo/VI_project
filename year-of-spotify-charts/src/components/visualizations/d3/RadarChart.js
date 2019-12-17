@@ -48,7 +48,8 @@ const RadarChart = function (parentSelector, data, options) {
         color: d3.scaleOrdinal(d3.schemeCategory10),	      //Color function,
         format: '.2%',
         unit: '',
-        legend: false
+        legend: false,
+        onLabelClick: d => { }
     }
 
     //Put all of the options into a variable called cfg
@@ -167,12 +168,14 @@ const RadarChart = function (parentSelector, data, options) {
         .attr('class', 'legend')
         .style('font-size', '11px')
         .style('fill', 'white')
+        .style('cursor', 'pointer')
         .attr('text-anchor', 'middle')
         .attr('dy', '0.35em')
         .attr('x', (d, i) => rScale(maxValue * cfg.labelFactor) * cos(angleSlice * i - HALF_PI))
         .attr('y', (d, i) => rScale(maxValue * cfg.labelFactor) * sin(angleSlice * i - HALF_PI))
         .text(d => d)
-        // .call(wrap, cfg.wrapWidth)
+        .on('click', d => cfg.onLabelClick(d))
+    // .call(wrap, cfg.wrapWidth)
 
     /////////////////////////////////////////////////////////
     ///////////// Draw the radar chart blobs ////////////////
