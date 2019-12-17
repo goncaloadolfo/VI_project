@@ -49,7 +49,14 @@ const RadarChart = function (parentSelector, data, options) {
         format: '.2%',
         unit: '',
         legend: false,
-        onLabelClick: d => { }
+        onLabelClick: d => { },
+        tooltipHtml: i => data[i].axes.reduce((acc, curr, idx) => {
+            if (idx === 0) return acc
+            acc += `<br />${curr.axis}: ${curr.value}`
+            if (idx !== data.length - 1) acc += ''
+            console.log(acc)
+            return acc
+        }, `${data[i].axes[0].axis}: ${data[i].axes[0].value}`)
     }
 
     //Put all of the options into a variable called cfg
@@ -204,26 +211,10 @@ const RadarChart = function (parentSelector, data, options) {
         .attr('d', d => radarLine(d.axes))
         .style('fill', (d, i) => cfg.color(i))
         .style('fill-opacity', cfg.opacityArea)
-    // .on('mouseover', function (d, i) {
-    //     //Dim all blobs
-    //     parent.selectAll('.radarArea')
-    //         .transition().duration(200)
-    //         .style('fill-opacity', 0.1)
-    //     //Bring back the hovered over blob
-    //     d3.select(this)
-    //         .transition().duration(200)
-    //         .style('fill-opacity', 0.7)
-    // })
-    // .on('mouseout', () => {
-    //     //Bring back all blobs
-    //     parent.selectAll('.radarArea')
-    //         .transition().duration(200)
-    //         .style('fill-opacity', cfg.opacityArea)
-    // })
 
     //Create the outlines
     blobWrapper.append('path')
-        .attr('class', 'radarStroke')
+        .attr('class', d => `radarStroke ${d.name.replace(/\s+/g, '-').toLowerCase()}`)
         .attr('d', function (d, i) { return radarLine(d.axes) })
         .style('stroke-width', cfg.strokeWidth + 'px')
         .style('stroke', (d, i) => cfg.color(i))
@@ -235,7 +226,7 @@ const RadarChart = function (parentSelector, data, options) {
         .data(d => d.axes)
         .enter()
         .append('circle')
-        .attr('class', 'radarCircle')
+        .attr('class', d => `radarCircle ${d.id.replace(/\s+/g, '-').toLowerCase()}`)
         .attr('r', cfg.dotRadius)
         .attr('cx', (d, i) => rScale(d.value) * cos(angleSlice * i - HALF_PI))
         .attr('cy', (d, i) => rScale(d.value) * sin(angleSlice * i - HALF_PI))
@@ -275,14 +266,16 @@ const RadarChart = function (parentSelector, data, options) {
                 .style('display', 'none').text('')
         })
 
-    const tooltip = g.append('text')
+    let tooltip = d3.select(parentSelector)
+        .append('div')
+        .style('opacity', 0)
         .attr('class', 'tooltip')
-        .attr('x', 0)
-        .attr('y', 0)
-        .style('font-size', '12px')
-        .style('display', 'none')
-        .attr('text-anchor', 'middle')
-        .attr('dy', '0.35em')
+        .style('background-color', 'white')
+        .style('color', 'black')
+        .style('border', 'solid')
+        .style('border-width', '1px')
+        .style('border-radius', '5px')
+        .style('padding', '2px')
 
     if (cfg.legend !== false && typeof cfg.legend === 'object') {
         let legendZone = svg.append('g')
@@ -321,7 +314,49 @@ const RadarChart = function (parentSelector, data, options) {
             .attr('y', (d, i) => i * 20 + 9)
             .attr('font-size', '11px')
             .attr('fill', 'white')
+            .style('cursor', 'default')
             .text(d => d)
+            .on('mouseover', function (d, i) {
+                //Dim all blobs
+                parent.selectAll('.radarCircle')
+                    .transition().duration(200)
+                    .style('fill-opacity', 0.1)
+                parent.selectAll('.radarStroke')
+                    .transition().duration(200)
+                    .style('stroke-opacity', 0.1)
+                //Bring back the hovered over blob
+                d3.selectAll(`.radarCircle.${d.replace(/\s+/g, '-').toLowerCase()}`)
+                    .transition().duration(200)
+                    .style('fill-opacity', 0.8)
+                d3.select(`.radarStroke.${d.replace(/\s+/g, '-').toLowerCase()}`)
+                    .transition().duration(200)
+                    .style('stroke-opacity', 1)
+                tooltip.style('opacity', 1)
+            })
+            .on('mousemove', function (d, i) {
+                let html = cfg.tooltipHtml(i)
+                console.log(html)
+                tooltip
+                    .html(html)
+                    .style('left', `${d3.mouse(this)[0] - 60}px`)
+                    .style('top', `${d3.mouse(this)[1]}px`)
+            })
+            .on('mouseout', () => {
+                //Bring back all blobs
+                parent.selectAll('.radarCircle')
+                    .transition().duration(200)
+                    .style('fill-opacity', .8)
+                parent.selectAll('.radarStroke')
+                    .transition().duration(200)
+                    .style('stroke-opacity', 1)
+                tooltip
+                    // .transition()
+                    // .duration(200)
+                    .style('opacity', 0)
+                    .style('left', '0px')
+                    .style('top', '0px')
+                    .style('display', 'none')
+            })
     }
     return svg
 }
