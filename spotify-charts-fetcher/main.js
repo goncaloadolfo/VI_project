@@ -9,14 +9,14 @@ Date.prototype.subDays = function (days) {
 }
 
 const REGION = 'global'
-const TOKEN = 'BQC_7mqbfNxLgdgPAat8wQZbrYXGEH-MfggjoGZsIrta6LnaQlWk82oZBc0qqHOtaOJBn2qNWSA9nWwf6F6IB0qV_UGiJvM3hDR2pYWqSdsK1mYZ5E2lbNNYheAShWgVTVELIBJx8MvHBJ3bVqo-zJPoiFFPGcoMxXATpbBuchcDq0uiV6qPGqHp5JPfMEeGHn5iZhWvd1zI87GxTIIwLc2OKEHp4WstwXFzcQ'
+const TOKEN = 'BQBXDpzMkbLwqjh_v_c0U_ZFiRknJPJeJ8UyBgQlGcsrUYsrk0NMxCRdeqln7EzcwApSI3dvUXqV57ek5UPOWaUB5CZJXLnVswlQEi6V91ysbm14d_hOB9WgNjQaSLX74r60ec1oeGFlSzYTMI0Hlz90_Ez5pf1f9_YI1oHly9AzK80tgIvE8vhFDJUdthb_iSoEC076-XyE8G5RvhlkO27LJY7xAVKjlIo77g'
 
 let requests_counter = 0
 
-processLastNDays(327)
+processLastNDays(22)
 
 async function processLastNDays(nDays) {
-    let today = new Date('2019-11-24')
+    let today = new Date('2019-12-16')
     let entries = []
 
     for (let i = 1; i <= nDays; i++) {

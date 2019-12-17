@@ -1,8 +1,8 @@
 const fetch = require('node-fetch')
 const fs = require('fs')
 
-const toFix = require('./spotify-charts1.json')
-const TOKEN = 'BQA77U47T84QJxSl4Y_PfczHoUp_TN3LLkS4BdZKCkhJ_9rz9TwuTTsVybOnVxo3KvLz9Igx7d2OML_X5_vMEYxcYq1XdBBf1aoyl6KhW3KDqCpb-aeOdy2SeeqtiWRc-RcocuyjKxx8K570ZuSFCJWFezcPojr_Slxjk-_n47_y7CDyoM23NFoCeZlbd9lq7uPppL2tvOE25SAU-qmyB3PHq8PhLdtjychMXg'
+const toFix = require('./spotify-charts.json')
+const TOKEN = 'BQBXDpzMkbLwqjh_v_c0U_ZFiRknJPJeJ8UyBgQlGcsrUYsrk0NMxCRdeqln7EzcwApSI3dvUXqV57ek5UPOWaUB5CZJXLnVswlQEi6V91ysbm14d_hOB9WgNjQaSLX74r60ec1oeGFlSzYTMI0Hlz90_Ez5pf1f9_YI1oHly9AzK80tgIvE8vhFDJUdthb_iSoEC076-XyE8G5RvhlkO27LJY7xAVKjlIo77g'
 
 let e = 0
 
