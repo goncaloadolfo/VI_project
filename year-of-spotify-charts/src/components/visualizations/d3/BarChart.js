@@ -94,8 +94,9 @@ const BarChart = function (parentSelector, data, options) {
         .on('click', d => {
             tooltip
                 .style('opacity', 0)
-                .style('left', '-200px')
-                .style('top', '-200px')
+                .style('left', '0px')
+                .style('top', '0px')
+                .style('display', 'none')
             cfg.onBarClick(d)
         })
 

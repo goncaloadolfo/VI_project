@@ -109,6 +109,7 @@ const ScatterPlot = function (parentSelector, data, options) {
             .style('opacity', 0)
             .style('left', '0px')
             .style('top', '0px')
+            .style('display', 'none')
         )
         .on('click', d => {
             tooltip
