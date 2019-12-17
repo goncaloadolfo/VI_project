@@ -253,18 +253,18 @@ const RadarChart = function (parentSelector, data, options) {
         .attr('cy', (d, i) => rScale(d.value) * sin(angleSlice * i - HALF_PI))
         .style('fill', 'none')
         .style('pointer-events', 'all')
-        .on('mouseover', function (d, i) {
-            tooltip
-                .attr('x', this.cx.baseVal.value - 10)
-                .attr('y', this.cy.baseVal.value - 10)
-                .transition()
-                .style('display', 'block')
-                .text(Format(d.value) + cfg.unit)
-        })
-        .on('mouseout', function () {
-            tooltip.transition()
-                .style('display', 'none').text('')
-        })
+        // .on('mouseover', function (d, i) {
+        //     tooltip
+        //         .attr('x', this.cx.baseVal.value - 10)
+        //         .attr('y', this.cy.baseVal.value - 10)
+        //         .transition()
+        //         .style('display', 'block')
+        //         .text(Format(d.value) + cfg.unit)
+        // })
+        // .on('mouseout', function () {
+        //     tooltip.transition()
+        //         .style('display', 'none').text('')
+        // })
 
     let tooltip = d3.select(parentSelector)
         .append('div')
