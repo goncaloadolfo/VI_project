@@ -60,6 +60,7 @@ const WordCloud = function (parentSelector, data, options) {
             .append('text')
             .style('font-size', d => `${cfg.sizeScale(d.value)}px`)
             .style('fill', (d, i) => cfg.color(i))
+            .style('cursor', 'pointer')
             .attr('text-anchor', 'middle')
             // .attr('font-family', 'Impact')
             .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
